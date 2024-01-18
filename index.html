@@ -281,11 +281,11 @@
 
       function spawnEnemies() {
         // Base enemy speed
-        let baseSpeed = 0.45;
+        let baseSpeed = 0.6;
 
         // Enemy speed increases more gradually in advanced stages
-        let speedIncreaseFactor = 0.02; // Smaller increase per level
-        let maxSpeedIncrease = 0.4; // Maximum additional speed
+        let speedIncreaseFactor = 0.05; // Smaller increase per level
+        let maxSpeedIncrease = 0.6; // Maximum additional speed
 
         // Calculate enemy speed based on the current level with a cap
         enemySpeed =
@@ -774,7 +774,7 @@
         playerY = canvas.height - 30;
 
         // Reset enemy properties
-        enemySpeed = 0.35; // Reset to initial enemy speed
+        enemySpeed = 0.6; // Reset to initial enemy speed
         enemyHorizontalSpeed = 1; // Reset to initial horizontal speed
 
         spawnEnemies(); // Spawn initial set of enemies
