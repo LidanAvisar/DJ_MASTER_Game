@@ -67,9 +67,9 @@
 
         document.getElementById('startButton').addEventListener('click', function () {
         document.getElementById('splashScreen').style.display = 'none';
-        isGameStarted = true; // Set to true when game starts
+        isGameStarted = true; 
         resetGame();
-        requestAnimationFrame(gameLoop); // Start the game loop
+        requestAnimationFrame(gameLoop); 
             
         });
 
@@ -83,9 +83,9 @@
         let score = 0;
         let playerHealth = 100;
 
-        let playerX = canvas.width / 2; //he horizontal position of the player on the canvas
-        let playerY = canvas.height - 30; //This is the vertical position of the player on the canvas. 
-        let playerWidth = 80; // size of player
+        let playerX = canvas.width / 2; 
+        let playerY = canvas.height - 30; 
+        let playerWidth = 80; 
         let playerHeight = 100;
 
         let enemies = [];
@@ -130,8 +130,8 @@
         let powerUpImage = new Image();
         powerUpImage.src = 'https://cdn.glitch.global/4a3f85be-459e-4dff-87a3-ab0925f8739a/cd.png?v=1705601484814';
 
-        let backgroundY = 0; // Initial Y position of the background
-        let targetImageSources = [""]; // Array of image sources
+        let backgroundY = 0; 
+        let targetImageSources = [""]; 
         let targetImages = [];
         let playAgainButtonBounds;
 
@@ -141,11 +141,10 @@
         let altBulletImage = new Image();
         altBulletImage.src = 'https://cdn.glitch.global/4a3f85be-459e-4dff-87a3-ab0925f8739a/key_alternative.png?v=1705601546949'; // Path to your alternative bullet image
         let currentBulletImage = bulletImage;
-        let charSpawnIntervalId; // Global variable to store the interval ID
+        let charSpawnIntervalId; 
 
         let characters = [];
 
-        // New character properties
         let char1 = {
             image: new Image(),
             x: Math.random() * (canvas.width - 50),
@@ -164,12 +163,12 @@
         };
         char2.image.src = 'https://cdn.glitch.global/4a3f85be-459e-4dff-87a3-ab0925f8739a/char2.png?v=1705601487387';
 
-        let bulletChangeTimer = 0; // Timer for the bullet change effect
-        let bulletFrequencyTimer = 0; // Timer for the bullet frequency effect
+        let bulletChangeTimer = 0; 
+        let bulletFrequencyTimer = 0; 
         let lastShotTime = 0;
-        let shootingInterval = 500; // Normal shooting interval in milliseconds
+        let shootingInterval = 500; 
 
-        let char1Speed = 2.0; // Adjust this value as needed for char1
+        let char1Speed = 2.0; 
         let char2Speed = 2.0;
 
         let char1Cooldown = 0;
@@ -180,14 +179,11 @@
         let lastTime = 0;
 
         function gameLoop(timestamp) {
-            // Calculate the time difference since the last frame
             const deltaTime = timestamp - lastTime;
             lastTime = timestamp;
 
-            // Update game logic and draw
             updateGameArea(deltaTime);
 
-            // Schedule the next frame
             if (!isGameOver && isGameStarted) {
                 requestAnimationFrame(gameLoop);
             }
@@ -203,11 +199,11 @@
                     targetImages.push(img);
                     loadedImages++;
                     if (loadedImages === targetImageSources.length) {
-                        spawnTargets(); // Call spawnTargets only after all images are loaded
+                        spawnTargets(); 
                     }
                 };
                 img.onerror = function () {
-                    console.error("Failed to load image:", src); // Error handling
+                    console.error("Failed to load image:", src); 
                 };
                 img.src = src;
             }
@@ -229,34 +225,30 @@
         }
 
         function spawnEnemies() {
-            // Base enemy speed
             let baseSpeed = 0.85;
 
-            // Enemy speed increases more gradually in advanced stages
-            let speedIncreaseFactor = 0.05; // Smaller increase per level
-            let maxSpeedIncrease = 2.5; // Maximum additional speed
+            let speedIncreaseFactor = 0.05; 
+            let maxSpeedIncrease = 2.5; 
 
-            // Calculate enemy speed based on the current level with a cap
+
             enemySpeed = baseSpeed + Math.min(speedIncreaseFactor * currentLevel, maxSpeedIncrease);
 
-            // Horizontal speed of enemies remains constant
+
             enemyHorizontalSpeed = 1.7;
 
-            // Base number of enemies starts at 3
+     
             let baseNumberOfEnemies = 7;
 
-            // The number of enemies increases slowly and is capped
-            let enemyIncreaseFactor = 0.25; // Slower increase per level
-            let maxEnemies = 12; // Cap the number of enemies
+            
+            let enemyIncreaseFactor = 0.25; 
+            let maxEnemies = 12; 
 
-            // Calculate the number of enemies based on the current level with a cap
             let numberOfEnemies = Math.min(baseNumberOfEnemies + Math.floor(enemyIncreaseFactor * currentLevel), maxEnemies);
 
-            // Spawn enemies
             for (let i = 0; i < numberOfEnemies; i++) {
                 enemies.push({
                     x: Math.random() * (canvas.width - enemyWidth),
-                    y: Math.random() * (-250) - enemyHeight, // Starting off-screen
+                    y: Math.random() * (-250) - enemyHeight, 
                     horizontalSpeed: enemyHorizontalSpeed
                 });
                 setTimeout(enemyShoot, Math.random() * (6000 - 2000) + 2000, i);
@@ -266,19 +258,14 @@
 
         function spawnCharacter(character, minInterval, maxInterval) {
             const spawn = () => {
-                // Randomize the x position within the canvas width
                 character.x = Math.random() * (canvas.width - character.width);
-                // Set the y position to just above the top of the canvas
                 character.y = -character.height;
 
-                // Randomly decide the next spawn time within the specified range
                 const nextSpawnTime = Math.random() * (maxInterval - minInterval) + minInterval;
 
-                // Set the timeout for the next spawn
                 setTimeout(spawn, nextSpawnTime);
             };
 
-            // Start the first spawn
             spawn();
         }
 
@@ -334,13 +321,13 @@
       
 
         function gameOver() {
-            clearInterval(gameInterval); // Stop the game loop
-            displayGameOver(); // Call the function to display the game over screen
-            // Additional game over logic if needed
+            clearInterval(gameInterval); 
+            displayGameOver(); 
+
         }
 
         function updateGameArea() {
-            // Draw the background twice to create a continuous effect
+            
             ctx.drawImage(backgroundImage, 0, backgroundY, canvas.width, canvas.height);
 
             drawPlayer();
@@ -352,58 +339,53 @@
 
             if (Date.now() > char1Cooldown) {
 
-                char1.y += char1Speed; // Use char1Speed for vertical movement
+                char1.y += char1Speed; 
                 ctx.drawImage(char1.image, char1.x, char1.y, char1.width, char1.height);
             }
-            // Update position and draw char2
             if (Date.now() > char2Cooldown) {
-                char2.y += char2Speed; // Use char2Speed for vertical movement
+                char2.y += char2Speed; 
                 ctx.drawImage(char2.image, char2.x, char2.y, char2.width, char2.height);
             }
-            //char1.y += 0.5; // Adjust the speed as needed
-            //char2.y += 0.5; // Adjust the speed as needed
+           
 
             if (playerHealth <= 0) {
                 gameOver();
                 ['backgroundMusic', 'song1', 'song2', 'song3', 'song4', 'song5', 'song6', 'song7'].forEach(songId => {
                     let song = document.getElementById(songId);
                     song.pause();
-                    song.currentTime = 0; // Reset the song to the beginning
+                    song.currentTime = 0; 
                 }); displayGameOver();
                 return;
             }
 
-            // Collision detection and response for char1
             if (playerX < char1.x + char1.width &&
                 playerX + playerWidth > char1.x &&
                 playerY < char1.y + char1.height &&
                 playerHeight + playerY > char1.y) {
-                // Apply the effect of char1
-                currentBulletImage = altBulletImage; // Change bullet image
+                currentBulletImage = altBulletImage; 
                 setTimeout(() => {
-                    currentBulletImage = bulletImage; // Reset bullet image after 7 seconds
+                    currentBulletImage = bulletImage; 
                 }, 7000);
 
-                // Move char1 off-screen
-                char1.y = -100; // Position above the top of the canvas
+              
+                char1.y = -100; 
                 char1Cooldown = Date.now() + charCooldownTime;
 
             }
 
-            // Collision detection and response for char2
+           
             if (playerX < char2.x + char2.width &&
                 playerX + playerWidth > char2.x &&
                 playerY < char2.y + char2.height &&
                 playerHeight + playerY > char2.y) {
-                // Apply the effect of char2
                 let originalBulletSpeed = bulletSpeed;
-                bulletSpeed /= 3; // Halve the bullet speed
+                bulletSpeed /= 3; 
                 setTimeout(() => {
-                    bulletSpeed = originalBulletSpeed; // Restore original speed after 7 seconds
+                    bulletSpeed = originalBulletSpeed; 
                 }, 7000);
 
-                // Move char2 off-screen
-                char2.y = -100; // Position above the top of the canvas
+               
+                char2.y = -100; 
                 char2Cooldown = Date.now() + charCooldownTime;
 
             }
@@ -412,7 +394,7 @@
                 enemy.y += enemySpeed;
                 enemy.x += enemy.horizontalSpeed;
 
-                if (Math.random() < 0.0005) { // 10% chance every frame to change direction
+                if (Math.random() < 0.0005) {
                     enemy.horizontalSpeed *= -1;
                 }
 
@@ -424,7 +406,7 @@
                     playerHeight + playerY > enemy.y) {
                     enemies.splice(enemyIndex, 1);
                     playerHealth -= 30;
-                    document.getElementById('explosionSound').play(); // Play explosion sound
+                    document.getElementById('explosionSound').play(); 
 
                 }
 
@@ -436,7 +418,7 @@
                     playerHealth -= 10; // Decrease player's life by 10
                     bombs.push({ x: enemy.x, y: canvas.height - enemyHeight, timer: bombDisplayTime });
                     enemies.splice(enemyIndex, 1);
-                    document.getElementById('explosionSound').play(); // Play explosion sound
+                    document.getElementById('explosionSound').play(); 
 
                 }
 
@@ -459,7 +441,7 @@
                     isPowerUpActive = true;
                     setTimeout(() => { isPowerUpActive = false; }, powerUpActiveTime);
                     changeGameMusic();
-                    document.getElementById('powerUpSound').play(); // Play sound on power-up collection
+                    document.getElementById('powerUpSound').play(); 
                 }
             });
 
@@ -520,11 +502,11 @@
 
 
         function changeGameMusic() {
-            // Stop all songs
+  
             let songs = ['backgroundMusic', 'song1', 'song2', 'song3', 'song4', 'song5', 'song6', 'song7'];
             songs.forEach(songId => document.getElementById(songId).pause());
 
-            // Randomly pick a new song
+          
             let randomSongId = songs[Math.floor(Math.random() * songs.length)];
             let newSong = document.getElementById(randomSongId);
             newSong.currentTime = 0;
@@ -539,13 +521,13 @@
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Set background to black
+       
             ctx.fillStyle = 'black';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 
-            // Draw Play Again button
-            ctx.fillStyle = "#FFD700"; // Gold color for the button
+           
+            ctx.fillStyle = "#FFD700"; 
             ctx.fillRect(canvas.width / 2 - 100, canvas.height / 2 + 40, 200, 40);
             ctx.fillStyle = "black";
             ctx.fillText("Play Again", canvas.width / 2 - 60, canvas.height / 2 + 70);
@@ -558,7 +540,7 @@
                 height: 40
             };
 
-            canvas.style.cursor = "default"; // Make the cursor visible
+            canvas.style.cursor = "default"; 
 
             ctx.fillStyle = "white";
             ctx.font = "40px Arial";
@@ -566,8 +548,7 @@
             ctx.font = "20px Arial";
             ctx.fillText("Your score: " + score, canvas.width / 2 - 60, canvas.height / 2 + 20);
 
-            // Draw Play Again button on canvas
-            ctx.fillStyle = "#FFD700"; // Gold color for the button
+            ctx.fillStyle = "#FFD700"; 
             ctx.fillRect(canvas.width / 2 - 100, canvas.height / 2 + 40, 200, 40);
             ctx.fillStyle = "black";
             ctx.fillText("Play Again", canvas.width / 2 - 60, canvas.height / 2 + 70);
@@ -580,10 +561,10 @@
         function displayStageCompletion() {
         
 
-            ctx.save(); // Save the current state of the canvas
+            ctx.save();
 
             ctx.fillStyle = "rgba(0, 0, 0, 0.5)"; 
-            ctx.fillRect(0, 0, canvas.width, canvas.height); // Cover the entire canvas
+            ctx.fillRect(0, 0, canvas.width, canvas.height); 
 
             ctx.fillStyle = "white";
             ctx.font = "40px 'Press Start 2P', Arial";
