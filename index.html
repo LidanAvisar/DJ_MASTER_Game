@@ -52,7 +52,7 @@
     <audio id="song6" src="https://cdn.glitch.global/4a3f85be-459e-4dff-87a3-ab0925f8739a/song6.mp3?v=1705601587827" loop></audio>
     <audio id="song7" src="https://cdn.glitch.global/4a3f85be-459e-4dff-87a3-ab0925f8739a/song7.mp3?v=1705948664738" loop></audio>
 
-    <audio id="explosionSound" src="https://cdn.glitch.global/4a3f85be-459e-4dff-87a3-ab0925f8739a/explosion.wav?v=1705601538739"></audio>
+    <audio id="explosionSound" src="https://cdn.glitch.global/4a3f85be-459e-4dff-87a3-ab0925f8739a/crash.mp3?v=1707493796830"></audio>
 
 
     <!-- GameAnalytics -->
@@ -382,7 +382,7 @@
                 bulletSpeed /= 3; 
                 setTimeout(() => {
                     bulletSpeed = originalBulletSpeed; 
-                }, 7000);
+                }, 5000);
 
                
                 char2.y = -100; 
@@ -404,9 +404,9 @@
                     playerX + playerWidth > enemy.x &&
                     playerY < enemy.y + enemyHeight &&
                     playerHeight + playerY > enemy.y) {
+                    document.getElementById('explosionSound').play(); 
                     enemies.splice(enemyIndex, 1);
                     playerHealth -= 30;
-                    document.getElementById('explosionSound').play(); 
 
                 }
 
@@ -415,10 +415,10 @@
                 }
 
                 if (enemy.y > canvas.height - enemyHeight) {
-                    playerHealth -= 10; // Decrease player's life by 10
+                    document.getElementById('explosionSound').play(); 
+                    playerHealth -= 10; 
                     bombs.push({ x: enemy.x, y: canvas.height - enemyHeight, timer: bombDisplayTime });
                     enemies.splice(enemyIndex, 1);
-                    document.getElementById('explosionSound').play(); 
 
                 }
 
