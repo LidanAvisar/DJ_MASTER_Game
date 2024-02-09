@@ -120,7 +120,7 @@
         bulletImage.src = 'https://cdn.glitch.global/4a3f85be-459e-4dff-87a3-ab0925f8739a/key.png?v=1705601551868';
 
         let backgroundImage = new Image();
-        backgroundImage.src = 'https://cdn.glitch.global/4a3f85be-459e-4dff-87a3-ab0925f8739a/back1.png?v=1705602444832';
+        backgroundImage.src = 'https://cdn.glitch.global/4a3f85be-459e-4dff-87a3-ab0925f8739a/image_iphone_res.png?v=1707492570782';
 
         let bombImage = new Image();
         bombImage.src = 'https://cdn.glitch.global/4a3f85be-459e-4dff-87a3-ab0925f8739a/bomb.gif?v=1705601472740';
@@ -681,6 +681,39 @@
         shoot();
     }
 });
+      
+      canvas.addEventListener("click", function(event) {
+    // Calculate click position relative to the canvas
+    var rect = canvas.getBoundingClientRect();
+    var clickX = event.clientX - rect.left;
+    var clickY = event.clientY - rect.top;
+
+    // Call a function to draw the indicator
+    drawClickIndicator(clickX, clickY);
+});
+
+// Function to draw an indicator where the player clicks
+function drawClickIndicator(x, y) {
+    const indicatorRadius = 10; // Size of the indicator
+    const indicatorDuration = 500; // How long the indicator is displayed (in milliseconds)
+
+    // Draw a circle at the click position
+    ctx.beginPath();
+    ctx.arc(x, y, indicatorRadius, 0, 2 * Math.PI, false);
+    ctx.fillStyle = 'red'; // Indicator color
+    ctx.fill();
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = '#003300';
+    ctx.stroke();
+
+    // Set a timeout to clear the indicator after a brief period
+    setTimeout(function() {
+        // Clear the area where the indicator was drawn
+        // Note: If your game has a constantly updating canvas (e.g., an animation loop),
+        // you might not need this step, as the canvas will be updated anyway.
+        ctx.clearRect(x - indicatorRadius - 2, y - indicatorRadius - 2, indicatorRadius * 2 + 4, indicatorRadius * 2 + 4);
+    }, indicatorDuration);
+}
 
 canvas.addEventListener("mousemove", (event) => {
     playerX = event.clientX - canvas.offsetLeft - playerWidth / 2;
