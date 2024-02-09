@@ -686,6 +686,15 @@ canvas.addEventListener("mousemove", (event) => {
     playerX = event.clientX - canvas.offsetLeft - playerWidth / 2;
     playerY = event.clientY - canvas.offsetTop - playerHeight / 2;
 });
+      
+      
+canvas.addEventListener("touchmove", function(event) {
+    event.preventDefault(); // Prevent scrolling when touching the canvas
+    let touch = event.touches[0];
+    playerX = touch.pageX - canvas.offsetLeft - playerWidth / 2;
+    playerY = touch.pageY - canvas.offsetTop - playerHeight / 2;
+}, false);
+
 
         function shoot() {
             if (!isGameOver && (bulletFrequencyTimer <= 0 || lastShotTime + shootingInterval <= Date.now())) {
