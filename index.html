@@ -76,15 +76,15 @@
     </script>
     <!-- End GameAnalytics -->
     <script>
+        let backgroundImage = new Image();
         function updateBackground() {
             const canvas = document.getElementById("gameCanvas");
             const ctx = canvas.getContext("2d");
-            let backgroundImage = new Image();
 
-            if (window.innerWidth < 700) {
-                backgroundImage.src = 'https://cdn.glitch.global/4a3f85be-459e-4dff-87a3-ab0925f8739a/back1.png?v=1705602444832'; // Mobile background
+            if (window.innerWidth < 768) {
+                backgroundImage.src = 'https://cdn.glitch.global/4a3f85be-459e-4dff-87a3-ab0925f8739a/check1.webp?v=1707755034437'; // Mobile background
             } else {
-                backgroundImage.src = 'https://cdn.glitch.global/4a3f85be-459e-4dff-87a3-ab0925f8739a/check1.webp?v=1707755034437'; // Desktop background
+                backgroundImage.src = 'https://cdn.glitch.global/4a3f85be-459e-4dff-87a3-ab0925f8739a/back1.png?v=1705602444832';
             }
 
             backgroundImage.onload = function () {
@@ -152,8 +152,8 @@
         let bulletImage = new Image();
         bulletImage.src = 'https://cdn.glitch.global/4a3f85be-459e-4dff-87a3-ab0925f8739a/key1.png?v=1707493291823';
 
-        let backgroundImage = new Image();
-        backgroundImage.src = 'https://cdn.glitch.global/4a3f85be-459e-4dff-87a3-ab0925f8739a/star.webp?v=1707755936665';
+        //let backgroundImage = new Image();
+        //backgroundImage.src = 'https://cdn.glitch.global/4a3f85be-459e-4dff-87a3-ab0925f8739a/star.webp?v=1707755936665';
 
         let bombImage = new Image();
         bombImage.src = 'https://cdn.glitch.global/4a3f85be-459e-4dff-87a3-ab0925f8739a/bomb.gif?v=1705601472740';
